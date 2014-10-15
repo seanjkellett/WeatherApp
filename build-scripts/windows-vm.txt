@@ -17,7 +17,7 @@ $env:Path += ";C:\Chocolatey\bin\;C:\Program Files (x86)\Git\bin"
 cd /inetpub
 mkdir tmp-weather
 cd tmp-weather
-git clone https://github.com/sorvaag/WeatherApp.git
+git clone https://github.com/seanjkellett/WeatherApp.git
 
 # delete any content in the default IIS site
 Remove-Item C:\inetpub\wwwroot\* -Force -Recurse

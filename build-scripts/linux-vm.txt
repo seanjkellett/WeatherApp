@@ -20,7 +20,7 @@ apt-get install git -y
 cd /root
 
 # clone the git repo
-git clone https://github.com/sorvaag/WeatherApp.git
+git clone https://github.com/seanjkellett/WeatherApp.git
 
 # copy the new web files
 cd WeatherApp/src
