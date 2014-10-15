@@ -51,15 +51,9 @@ resources:
       flavor: GP-Small
       networks:
         - port: { get_resource: webapp_port }
-      user_data: 
-str_replace:
-          template: |
-            #!/bin/bash -v
+      user_data: |
+            #!/bin/bash
 
-            passwd ubuntu <<EOF
-            Telstra!
-            Telstra!
-            EOF
             sudo -i
             apt-get update
             apt-get install apache2 -y
