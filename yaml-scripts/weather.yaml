@@ -1,0 +1,84 @@
+heat_template_version: 2013-05-23
+description: >
+  A simple Heat template that spins up multiple instances and a private network (HOT template in YAML).
+
+resources:
+  heat_network_01:
+    type: OS::Neutron::Net
+    properties:
+      admin_state_up: true
+      name: heat-network-01
+  heat_subnet_01:
+    type: OS::Neutron::Subnet
+    properties:
+      name: heat-subnet-01
+      cidr: 10.10.10.0/24
+      enable_dhcp: true
+      network_id: { get_resource: heat_network_01 }
+      dns_nameservers: [8.8.8.8]
+  heat_router_01:
+    type: OS::Neutron::Router
+    properties:
+      admin_state_up: true
+      name: heat-router-01
+  heat_router_01_gw:
+    type: OS::Neutron::RouterGateway
+    properties:
+      network_id: 68976754-2af4-42f5-b7d0-442970634987
+      router_id: { get_resource: heat_router_01 }
+  heat_router_int0:
+    type: OS::Neutron::RouterInterface
+    properties:
+      router_id: { get_resource: heat_router_01 }
+      subnet_id: { get_resource: heat_subnet_01 }
+
+  webapp_port:
+    type: OS::Neutron::Port
+    properties:
+      admin_state_up: true
+      network_id: { get_resource: heat_network_01 }
+  webapp_floating_ip:
+    type: OS::Neutron::FloatingIP
+    properties:
+      floating_network_id: 68976754-2af4-42f5-b7d0-442970634987
+      port_id: { get_resource: webapp_port }
+
+  web-app-instance:
+    type: OS::Nova::Server
+    properties:
+      name: web-app-instance
+      image: 2eb9dacc-f5bc-4972-98a9-e3421f8fba7c
+      flavor: GP-Small
+      networks:
+        - port: { get_resource: webapp_port }
+      user_data:
+        str_replace:
+          template: |
+#!/bin/bash
+passwd ubuntu <<EOF
+Telstra!
+Telstra!
+EOF
+
+# execute as ROOT
+sudo -i
+
+# get a list of package updates
+apt-get update
+
+# install apache
+apt-get install apache2 -y
+
+# install the git client
+apt-get install git -y
+
+# download the three default pages
+cd /root
+
+# clone the git repo
+git clone https://github.com/seanjkellett/WeatherApp.git
+
+# copy the new web files
+cd WeatherApp/src
+mv * /var/www/html
+
