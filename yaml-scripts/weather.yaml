@@ -56,7 +56,10 @@ str_replace:
           template: |
             #!/bin/bash -v
 
-            echo ubuntu:Telstra! | chpasswd
+            passwd ubuntu <<EOF
+            Telstra!
+            Telstra!
+            EOF
             sudo -i
             apt-get update
             apt-get install apache2 -y
