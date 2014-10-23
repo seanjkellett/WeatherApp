@@ -2,12 +2,13 @@
 $(document).ready(function () {
 
     /* Does your browser support geolocation? */
+/*
     if (navigator.geolocation) {
         $(".js-geolocation").show();
     } else {
         $(".js-geolocation").hide();
     }
-
+*/
     /* Put the cursor in the search box */
     $("#search-location").focus();
 
@@ -18,15 +19,17 @@ $(document).ready(function () {
         loadWeather(location + ", AUS");
     }
     else {
+	// do nothing.
+/*
         if (navigator.geolocation && location != "geo") {
             navigator.geolocation.getCurrentPosition(function (position) {
-            // window.location.href = window.location.href.split('?')[0] + "?location=geo"; //remove the current query string
             loadWeather(position.coords.latitude + ',' + position.coords.longitude); //load weather using your lat/lng coordinates
             });
         }
         else {
             loadWeather("Sydney, AUS", "");
         }
+*/
     }
 });
 

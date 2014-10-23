@@ -21,7 +21,12 @@ cd /root
 
 # clone the git repo
 git clone https://github.com/seanjkellett/impress.js.git
+git clone https://github.com/seanjkellett/WeatherApp.git
 
 # copy the new web files
-cd WeatherApp/src
-mv * /var/www/html
+mv impress.js/* /var/www/html
+
+mkdir /var/www/html/weather
+mv WeatherApp/src/* /var/www/html/weather
+
+

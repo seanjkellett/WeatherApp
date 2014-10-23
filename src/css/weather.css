@@ -10,12 +10,19 @@ html {
     width: 100%;
     height: 100%;
     background-color: #1192d3;
+    background-repeat: no-repeat;
+    background: -webkit-linear-gradient(top, rgba(252,0,129,1) 12%, rgba(70,25,140,1)); 
+    background: -o-linear-gradient(top, rgba(252,0,129,1) 12%, rgba(70,25,140,1));
+    background: -moz-linear-gradient(top, rgba(252,0,129,1) 12%, rgba(70,25,140,1));
+    background: linear-gradient(to top, rgba(252,0,129,1) 12%, rgba(70,25,140,1)); 
     background-size: cover;
+
 }
 
 body {
     padding: 15px 0;
     font: 13px 'Open Sans', "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+    
 }
 
 #weather {
