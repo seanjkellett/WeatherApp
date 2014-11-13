@@ -48,7 +48,7 @@ resources:
     properties:
       name: web-app-instance
       image: 2eb9dacc-f5bc-4972-98a9-e3421f8fba7c
-      flavor: GP-Small
+      flavor: Micro-Small
       networks:
         - port: { get_resource: webapp_port }
       user_data: |
